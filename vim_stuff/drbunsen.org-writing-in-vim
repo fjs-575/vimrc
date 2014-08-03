@@ -1,0 +1,31 @@
+ Vim is a tremendous tool for text manipulation, but it is not configured properly for writing right out of the box. This drawback alone is enough to dissuade some people from ever using Vim.1 This is unfortunate. The idiosyncrasies that make Vim awkward for word processing exist because Vim is principally configured to operate as a code editor. However, with only a few customizations Vim can become a power writing tool. This post is about my experiences with optimizing Vim for writing.
+
+Before diving into specialized customizations, it's import to remember a few key Vim commands that are vital to efficient word processing. Without owning these commands, word processing in Vim is difficult. This list is by no means comprehensive, but these examples highlight some of the commands I find most useful while writing:
+
+3diw—delete inside the current word and the next two words
+dwwP—swap the current word with the next word
+d?foo—delete from the cursor to the previous string “foo”
+ct.—change from the cursor until the next period
+d^—delete from the cursor to the beginning of the line
+d>D—delete from the cursor to the end of the line
+2J—join the current line with the line below
+das—delete around the current sentence
+c(—change from the cursor to the begining of a sentence
+>}—go to the end of the current paragraph
+dapP—swap current paragraph with the next paragraph
+To setup Vim for writing, I find it best to make a few modifications to my vimrc. I've found the best way to configure a writing environment is to map several customizations to a single function. Using this method, the writing environment can be toggled on or off by issuing one command. My core writing function is bound to :WP. This mapping calls the WordProcessorMode() function, which looks like this:
+
+func! WordProcessorMode() 
+  setlocal formatoptions=1 
+  setlocal noexpandtab 
+  map j gj 
+  map k gk
+  setlocal spell spelllang=en_us 
+  set thesaurus+=/Users/sbrown/.vim/thesaurus/mthesaur.txt
+  set complete+=s
+  set formatprg=par
+  setlocal wrap 
+  setlocal linebreak 
+endfu 
+com! WP call WordProcessorMode()
+This function goes a long way to setting up a functional writing environment. Perhaps the most interesting line in this function is set formatprg=par. This line tells Vim to use the Unix utility par to format text.2 par is an excellent text formatting tool that improves readability over Vim's default formatting engine. In writing mode, issuing the command gq on highlighted text will reformat text using par. The output of text formatted with Vim (on top) compared to par (on bottom) looks like this:
