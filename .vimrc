@@ -37,7 +37,7 @@ set scrolloff=3         " Distance from top and bottom when scrolling.
 set laststatus=2        " Always show a status line. Even when there's only one window.
 set virtualedit=all     " Allow the cursor to go in to invalid places.
 set mousehide           " Hide the mouse pointer while typing.
-set guioptions=ac      " Set of all visual stuff when using gvim.
+set guioptions=acm      " Set of all visual stuff when using gvim.
 set incsearch           " Incrementally match the search.
 set hlsearch            " Set highlighting on when searching.
 set synmaxcol=2048      " Syntax coloring lines that are too long just slows down the world.
@@ -55,7 +55,8 @@ set stl=%f\ %m\ %r\ Line:\ %l/%L[%p%%]\ Col:\ %c\ Buf:\ #%n\ [%b][0x%B]\ fo:\ [%
 ":colorscheme xoria256_fjs
 if has("gui_running")
     ":colorscheme xoria256_fjs
-    :colorscheme montz
+    ":colorscheme montz
+    :colorscheme github
     set gfn=Liberation\ Mono\ 10
     "set gfn=Inconsolata\ 10
     set columns=110 lines=64
